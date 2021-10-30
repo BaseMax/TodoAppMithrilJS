@@ -47,6 +47,21 @@ class FooterComponent {
 		// else
 			this.setInput(e.target.value)
 	}
+	loadCache() {
+		const tmp = localStorage.getItem("todos");
+		if(tmp !== null) {
+			console.log(`Load cache ${tmp}`)
+			const arr = JSON.parse(tmp)
+			if(arr instanceof Array) {
+				globalState.todos = arr
+			}
+		}
+	}
+	saveCachec() {
+		const tmp = JSON.stringify(globalState.todos)
+		console.log(`Save cache ${tmp}`)
+		localStorage.setItem("todos", tmp)
+	}
 	add() {
 		this.value = this.value.trim();
 		if(this.value === "") {
@@ -58,8 +73,10 @@ class FooterComponent {
 			category: this.category
 		})
 		this.setInput("")
+		this.saveCachec()
 	}
 	view() {
+		this.loadCache()
 		return m("footer", {class:"footer"}, 
 					m("form", {name: "todos", class:"footer__wrapper", "data-action":"add", onsubmit: (e) => {
 						e.preventDefault()
@@ -153,7 +170,8 @@ class TodoItem {
 	}
 	deleteTodo() {
 		console.log(`delete ${this.todo.index}`)
-		globalState.todos.splice(this.todo.index, 1)
+		delete globalState.todos[this.todo.index]
+		// globalState.todos.splice(this.todo.index, 1)
 	}
 	view() {
 		return m("div", {class:"todo"},
