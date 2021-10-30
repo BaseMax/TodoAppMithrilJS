@@ -28,6 +28,7 @@ class HeaderComponent {
 class FooterComponent {
 	constructor(vnode) {
 		this.value = ""
+		this.category = "RED"
 	}
 	oncreate() {
 		
@@ -36,21 +37,26 @@ class FooterComponent {
 		this.value = value
 		console.log(`Set value = ${this.value}`)
 	}
+	changeCategory(e) {
+		this.category = e.target.getAttribute('value')
+		console.log(`Set category = ${this.category}`)
+	}
 	handleInput(e) {
-		if(e.keyCode === 13)
-			this.add()
-		else
+		// if(e.keyCode === 13)
+		// 	this.add()
+		// else
 			this.setInput(e.target.value)
 	}
 	add() {
-		alert("Add");
-		this.value = "";
+		console.log(`Add todo(${this.value}, ${this.category})`)
+		this.setInput("")
 	}
 	view() {
 		return m("footer", {class:"footer"}, 
 					m("form", {name: "todos", class:"footer__wrapper", "data-action":"add", onsubmit: (e) => {
-						e.preventDefault();
-						this.add(document.forms.todos.todo.value)
+						e.preventDefault()
+						// this.setInput(document.forms.todos.todo.value)
+						this.add()
 					}},
 						[
 							m("div", {class:"form-box"},
@@ -60,7 +66,7 @@ class FooterComponent {
 										class:"form-box__input", 
 										type:"text", 
 										placeholder:"add todo...", 
-										// oninput: (e) => { this.handleInput(e) },
+										oninput: this.handleInput.bind(this),
 										// onkeyup: (e) => { this.handleInput(e) },
 										value: this.value,
 
@@ -74,21 +80,35 @@ class FooterComponent {
 								[
 									m("div", {class:"color"},
 										[
-											m("input", {class:"color__radio", type:"radio", id:"red", name:"category", value:"#e74c3c", checked:""}),
+											m("input", {class:"color__radio", type:"radio", id:"red", name:"category", value:"RED", checked:"", onchange: (this.changeCategory.bind(this))}),
 											m("span", {class:"checked"}),
 											m("label", {class:"color__label red", "for":"red"})
 										]
 									),
 									m("div", {class:"color"},
 										[
-											m("input", {class:"color__radio", type:"radio", id:"blue", name:"category", value:"#3498db"}),
+											m("input", {
+												class:"color__radio",
+												type:"radio",
+												id:"blue",
+												name:"category",
+												value:"BLUE",
+												onchange: this.changeCategory.bind(this)
+											}),
 											m("span", {class:"checked"}),
 											m("label", {class:"color__label blue", "for":"blue"})
 										]
 									),
 									m("div", {class:"color"},
 										[
-											m("input", {class:"color__radio", type:"radio", id:"green", name:"category", value:"#2ecc71"}),
+											m("input", {
+												class:"color__radio",
+												type:"radio",
+												id:"green",
+												name:"category",
+												value:"GREEN",
+												onchange: this.changeCategory.bind(this)
+											}),
 											m("span", {class:"checked"}),
 											m("label", {class:"color__label green", "for":"green"})
 										]
