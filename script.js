@@ -214,7 +214,7 @@ class MainComponent {
 	view() {
 		return m("main", {class:"main", style:{"height":"280px"}}, 
 			m("div", {class:"todos"},
-				globalState.todos.length === 0 ?
+				globalState.todos.filter((x) => x !== null).length === 0 ?
 					[
 						m("div", {class:"empty"},
 							[
