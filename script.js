@@ -32,8 +32,9 @@ class FooterComponent {
 	oncreate() {
 		
 	}
-	typing(e) {
-		// state.fieldInputValue = e.value
+	setInput(value) {
+		this.value = value
+		console.log(`Set value = ${this.value}`)
 	}
 	handleInput(e) {
 		if(e.keyCode === 13)
@@ -44,15 +45,6 @@ class FooterComponent {
 	add() {
 		alert("Add");
 		this.value = "";
-		// const field = e.target.parentElement
-		// console.log(field)
-		// console.log(field.value)
-		// alert("add")
-		// console.log(e)
-	}
-	setInput(value) {
-		this.value = value
-		console.log(`Set value = ${this.value}`)
 	}
 	view() {
 		return m("footer", {class:"footer"}, 
@@ -64,12 +56,12 @@ class FooterComponent {
 										class:"form-box__input", 
 										type:"text", 
 										placeholder:"add todo...", 
-										oninput: (e) => { this.handleInput(e) },
-										// onkeyup: (e) => { this.handleInput(e) },
+										// oninput: (e) => { this.handleInput(e) },
+										onkeyup: (e) => { this.handleInput(e) },
 										value: this.value,
 
 									}),
-									m("button", {class:"form-box__btn", type:"submit", onclick: this.add},
+									m("button", {class:"form-box__btn", type:"submit", onclick: this.add.bind(this)},
 										"Add"
 									)
 								]
@@ -195,16 +187,3 @@ const Parent = m("div", {class:"app"},
 )
 
 m.render(root, Parent)
-/*
-const html = document.querySelector("html")
-const mode = document.querySelector(".header__icon--mode")
-let theme = "LIGHT"
-mode.addEventListener("click", () => {
-	if(theme === "LIGHT") {
-		theme = "DARK"
-	} else {
-		theme = "LIGHT"
-	}
-	html.style = theme === "DARK" ? '--bgColor:#333; --textColor:#fff; --formColor:#484848;' : '--bgColor:#fff; --textColor:#333; --formColor:#fff;';
-})
-*/
