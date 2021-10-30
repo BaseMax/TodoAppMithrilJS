@@ -29,6 +29,7 @@ class FooterComponent {
 	constructor(vnode) {
 		this.value = ""
 		this.category = "RED"
+		// this.loadCache()
 	}
 	oncreate() {
 		
@@ -47,17 +48,7 @@ class FooterComponent {
 		// else
 			this.setInput(e.target.value)
 	}
-	loadCache() {
-		const tmp = localStorage.getItem("todos");
-		if(tmp !== null) {
-			console.log(`Load cache ${tmp}`)
-			const arr = JSON.parse(tmp)
-			if(arr instanceof Array) {
-				globalState.todos = arr
-			}
-		}
-	}
-	saveCachec() {
+	saveCache() {
 		const tmp = JSON.stringify(globalState.todos)
 		console.log(`Save cache ${tmp}`)
 		localStorage.setItem("todos", tmp)
@@ -73,10 +64,10 @@ class FooterComponent {
 			category: this.category
 		})
 		this.setInput("")
-		this.saveCachec()
+		this.saveCache()
 	}
 	view() {
-		this.loadCache()
+		// this.loadCache()
 		return m("footer", {class:"footer"}, 
 			m("form", {name: "todos", class:"footer__wrapper", "data-action":"add", onsubmit: (e) => {
 				e.preventDefault()
@@ -204,9 +195,21 @@ class TodoItem {
 
 class MainComponent {
 	constructor() {
+		this.loadCache()
 	}
 	oncreate() {
 
+	}
+	loadCache() {
+		const tmp = localStorage.getItem("todos");
+		if(tmp !== null) {
+			console.log(`Load cache ${tmp}`)
+			const arr = JSON.parse(tmp)
+			if(arr instanceof Array) {
+				globalState.todos = arr
+				console.log(`Set state todos = `, globalState.todos)
+			}
+		}
 	}
 	view() {
 		return m("main", {class:"main", style:{"height":"280px"}}, 
