@@ -1,5 +1,5 @@
-const state = {
-	fieldInputValue: "first", 
+const globalState = {
+
 }
 class HeaderComponent {
 	constructor(vnode) {
