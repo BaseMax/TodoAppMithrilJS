@@ -215,9 +215,14 @@ class TodoItem {
 						m("svg", {class:"settings__icon", "stroke":"currentColor", "fill":"currentColor", "stroke-width":"0", "viewBox":"0 0 24 24", "data-action":"edit", "height":"1em", "width":"1em", "xmlns":"http://www.w3.org/2000/svg",
 							onclick: () => {
 								console.log("edit:", todo)
-								globalState.editing = todo.index
-								globalState.todoInput = todo.value
-								globalState.todoCategory = todo.category
+								if(globalState.editing !== undefined && globalState.editing === todo.index) {
+									globalState.editing = undefined
+									globalState.todoInput = ""
+								} else {
+									globalState.editing = todo.index
+									globalState.todoInput = todo.value
+									globalState.todoCategory = todo.category
+								}
 							}
 						},
 							[
