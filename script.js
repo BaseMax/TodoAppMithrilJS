@@ -10,18 +10,18 @@ class HeaderComponent {
 	}
 	view() {
 		return m("header", {class:"header", style:{"border-bottom-color":"var(--textColor)"}},
-					[
-						m("svg", {class:"header__icon header__icon--mode", "stroke":"currentColor", "fill":"currentColor", "stroke-width":"0", "viewBox":"0 0 24 24", "height":"1em", "width":"1em", "xmlns":"http://www.w3.org/2000/svg"}, 
-							m("path", {"d":"M20.742,13.045c-0.677,0.18-1.376,0.271-2.077,0.271c-2.135,0-4.14-0.83-5.646-2.336c-2.008-2.008-2.799-4.967-2.064-7.723 c0.092-0.345-0.007-0.713-0.259-0.965C10.444,2.04,10.077,1.938,9.73,2.034C8.028,2.489,6.476,3.382,5.241,4.616 c-3.898,3.898-3.898,10.243,0,14.143c1.889,1.889,4.401,2.93,7.072,2.93c2.671,0,5.182-1.04,7.07-2.929 c1.236-1.237,2.13-2.791,2.583-4.491c0.092-0.345-0.008-0.713-0.26-0.965C21.454,13.051,21.085,12.951,20.742,13.045z M17.97,17.346c-1.511,1.511-3.52,2.343-5.656,2.343c-2.137,0-4.146-0.833-5.658-2.344c-3.118-3.119-3.118-8.195,0-11.314 c0.602-0.602,1.298-1.102,2.06-1.483c-0.222,2.885,0.814,5.772,2.89,7.848c2.068,2.069,4.927,3.12,7.848,2.891 C19.072,16.046,18.571,16.743,17.97,17.346z"})
-						),
-						m("h1", {class:"header__logo"}, 
-							m("img", {"src":"1.png", "width":"140", "alt":""})
-						),
-						m("p", {class:"header__text", style:{"color":"var(--textColor)"}}, 
-							"HeyBug Todo App"
-						)
-					]
+			[
+				m("svg", {class:"header__icon header__icon--mode", "stroke":"currentColor", "fill":"currentColor", "stroke-width":"0", "viewBox":"0 0 24 24", "height":"1em", "width":"1em", "xmlns":"http://www.w3.org/2000/svg"}, 
+					m("path", {"d":"M20.742,13.045c-0.677,0.18-1.376,0.271-2.077,0.271c-2.135,0-4.14-0.83-5.646-2.336c-2.008-2.008-2.799-4.967-2.064-7.723 c0.092-0.345-0.007-0.713-0.259-0.965C10.444,2.04,10.077,1.938,9.73,2.034C8.028,2.489,6.476,3.382,5.241,4.616 c-3.898,3.898-3.898,10.243,0,14.143c1.889,1.889,4.401,2.93,7.072,2.93c2.671,0,5.182-1.04,7.07-2.929 c1.236-1.237,2.13-2.791,2.583-4.491c0.092-0.345-0.008-0.713-0.26-0.965C21.454,13.051,21.085,12.951,20.742,13.045z M17.97,17.346c-1.511,1.511-3.52,2.343-5.656,2.343c-2.137,0-4.146-0.833-5.658-2.344c-3.118-3.119-3.118-8.195,0-11.314 c0.602-0.602,1.298-1.102,2.06-1.483c-0.222,2.885,0.814,5.772,2.89,7.848c2.068,2.069,4.927,3.12,7.848,2.891 C19.072,16.046,18.571,16.743,17.97,17.346z"})
+				),
+				m("h1", {class:"header__logo"}, 
+					m("img", {"src":"1.png", "width":"140", "alt":""})
+				),
+				m("p", {class:"header__text", style:{"color":"var(--textColor)"}}, 
+					"HeyBug Todo App"
 				)
+			]
+		)
 	}
 }
 
@@ -78,81 +78,81 @@ class FooterComponent {
 	view() {
 		this.loadCache()
 		return m("footer", {class:"footer"}, 
-					m("form", {name: "todos", class:"footer__wrapper", "data-action":"add", onsubmit: (e) => {
-						e.preventDefault()
-						// this.setInput(document.forms.todos.todo.value)
-						this.add()
-					}},
+			m("form", {name: "todos", class:"footer__wrapper", "data-action":"add", onsubmit: (e) => {
+				e.preventDefault()
+				// this.setInput(document.forms.todos.todo.value)
+				this.add()
+			}},
+				[
+					m("div", {class:"form-box"},
 						[
-							m("div", {class:"form-box"},
+							m("input", {
+								name: "todo",
+								class:"form-box__input", 
+								type:"text", 
+								placeholder:"add todo...", 
+								oninput: this.handleInput.bind(this),
+								// onkeyup: (e) => { this.handleInput(e) },
+								value: this.value,
+
+							}),
+							m("button", {class:"form-box__btn", type:"submit"},
+								"Add"
+							)
+						]
+					),
+					m("div", {class:"colors"},
+						[
+							m("div", {class:"color"},
 								[
 									m("input", {
-										name: "todo",
-										class:"form-box__input", 
-										type:"text", 
-										placeholder:"add todo...", 
-										oninput: this.handleInput.bind(this),
-										// onkeyup: (e) => { this.handleInput(e) },
-										value: this.value,
-
+										class:"color__radio",
+										type:"radio",
+										id:"red",
+										name:"category",
+										checked: this.category === "RED",
+										value:"RED",
+										onchange: this.changeCategory.bind(this)
 									}),
-									m("button", {class:"form-box__btn", type:"submit"},
-										"Add"
-									)
+									m("span", {class:"checked"}),
+									m("label", {class:"color__label red", "for":"red"})
 								]
 							),
-							m("div", {class:"colors"},
+							m("div", {class:"color"},
 								[
-									m("div", {class:"color"},
-										[
-											m("input", {
-												class:"color__radio",
-												type:"radio",
-												id:"red",
-												name:"category",
-												checked: this.category === "RED",
-												value:"RED",
-												onchange: this.changeCategory.bind(this)
-											}),
-											m("span", {class:"checked"}),
-											m("label", {class:"color__label red", "for":"red"})
-										]
-									),
-									m("div", {class:"color"},
-										[
-											m("input", {
-												class:"color__radio",
-												type:"radio",
-												id:"blue",
-												name:"category",
-												checked: this.category === "BLUE",
-												value:"BLUE",
-												onchange: this.changeCategory.bind(this)
-											}),
-											m("span", {class:"checked"}),
-											m("label", {class:"color__label blue", "for":"blue"})
-										]
-									),
-									m("div", {class:"color"},
-										[
-											m("input", {
-												class:"color__radio",
-												type:"radio",
-												id:"green",
-												name:"category",
-												checked: this.category === "GREEN",
-												value:"GREEN",
-												onchange: this.changeCategory.bind(this)
-											}),
-											m("span", {class:"checked"}),
-											m("label", {class:"color__label green", "for":"green"})
-										]
-									)
+									m("input", {
+										class:"color__radio",
+										type:"radio",
+										id:"blue",
+										name:"category",
+										checked: this.category === "BLUE",
+										value:"BLUE",
+										onchange: this.changeCategory.bind(this)
+									}),
+									m("span", {class:"checked"}),
+									m("label", {class:"color__label blue", "for":"blue"})
+								]
+							),
+							m("div", {class:"color"},
+								[
+									m("input", {
+										class:"color__radio",
+										type:"radio",
+										id:"green",
+										name:"category",
+										checked: this.category === "GREEN",
+										value:"GREEN",
+										onchange: this.changeCategory.bind(this)
+									}),
+									m("span", {class:"checked"}),
+									m("label", {class:"color__label green", "for":"green"})
 								]
 							)
 						]
 					)
-				)
+				]
+			)
+		)
 	} // end view
 }
 
@@ -210,31 +210,31 @@ class MainComponent {
 	}
 	view() {
 		return m("main", {class:"main", style:{"height":"280px"}}, 
-					m("div", {class:"todos"},
-						globalState.todos === [] ?
+			m("div", {class:"todos"},
+				globalState.todos === [] ?
+					[
+						m("div", {class:"empty"},
 							[
-								m("div", {class:"empty"},
-									[
-										m("img", {"width":"200", "src":"light.png", "alt":""}),
-										m("h2", 
-											"Your to-do list is empty."
-										),
-										m("p", 
-											"Please create a new task"
-										)
-									]
+								m("img", {"width":"200", "src":"light.png", "alt":""}),
+								m("h2", 
+									"Your to-do list is empty."
 								),
+								m("p", 
+									"Please create a new task"
+								)
 							]
-							: globalState.todos.map((todo, index) => {
-								return m(TodoItem, {
-									todo: {
-										index: index,
-										...todo
-									}
-								})
-							})
-					)
-				)
+						),
+					]
+					: globalState.todos.map((todo, index) => {
+						return m(TodoItem, {
+							todo: {
+								index: index,
+								...todo
+							}
+						})
+					})
+			)
+		)
 	}
 }
 
@@ -247,8 +247,8 @@ class ThemeComponent {
 	}
 	view() {
 		return m("div", 
-					m("div", {class:"helper-layout-moon", style:{"transform":"scale(1)"}})
-				)
+			m("div", {class:"helper-layout-moon", style:{"transform":"scale(1)"}})
+		)
 	}
 }
 
