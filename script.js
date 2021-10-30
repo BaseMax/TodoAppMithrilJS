@@ -80,7 +80,15 @@ class FooterComponent {
 								[
 									m("div", {class:"color"},
 										[
-											m("input", {class:"color__radio", type:"radio", id:"red", name:"category", value:"RED", checked:"", onchange: (this.changeCategory.bind(this))}),
+											m("input", {
+												class:"color__radio",
+												type:"radio",
+												id:"red",
+												name:"category",
+												checked: this.category === "RED",
+												value:"RED",
+												onchange: this.changeCategory.bind(this)
+											}),
 											m("span", {class:"checked"}),
 											m("label", {class:"color__label red", "for":"red"})
 										]
@@ -92,6 +100,7 @@ class FooterComponent {
 												type:"radio",
 												id:"blue",
 												name:"category",
+												checked: this.category === "BLUE",
 												value:"BLUE",
 												onchange: this.changeCategory.bind(this)
 											}),
@@ -106,6 +115,7 @@ class FooterComponent {
 												type:"radio",
 												id:"green",
 												name:"category",
+												checked: this.category === "GREEN",
 												value:"GREEN",
 												onchange: this.changeCategory.bind(this)
 											}),
