@@ -141,7 +141,11 @@ class FooterComponent {
 
 class MainComponent {
 	constructor() {
-
+		this.mappingCategory = {
+			RED: 'red',
+			BLUE: 'blue',
+			GREEN: 'green',
+		}
 	}
 	oncreate() {
 
@@ -166,7 +170,7 @@ class MainComponent {
 							: globalState.todos.map((todo) => {
 								return m("div", {class:"todo"},
 									[
-										m("span", {class:"category", style:{"background-color":"rgb(52, 152, 219)"}}),
+										m("span", {class:"category "+ this.mappingCategory[todo.category], style:{}}),
 										m("p", {class:"todo__text", "data-action":"checked", style:{"color":"var(--textColor)"}},
 											[
 												todo.value, 
