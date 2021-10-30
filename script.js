@@ -61,7 +61,7 @@ class FooterComponent {
 										value: this.value,
 
 									}),
-									m("button", {class:"form-box__btn", type:"submit", onclick: this.add.bind(this)},
+									m("button", {class:"form-box__btn", type:"submit", onclick: () => this.add()},
 										"Add"
 									)
 								]
@@ -177,13 +177,23 @@ class ContainerComponent {
 	}
 }
 
-const Parent = m("div", {class:"app"}, 
-	m(ContainerComponent, [
-		m(ThemeComponent),
-		m(HeaderComponent),
-		m(MainComponent),
-		m(FooterComponent)
-	])
-)
+// const Parent = m("div", {class:"app"}, 
+// 	m(ContainerComponent, [
+// 		m(ThemeComponent),
+// 		m(HeaderComponent),
+// 		m(MainComponent),
+// 		m(FooterComponent)
+// 	])
+// )
+// m.render(root, Parent)
 
-m.render(root, Parent)
+m.mount(document.body, {
+	view : () => m('.app',
+	  m(ContainerComponent, [
+			m(ThemeComponent),
+			m(HeaderComponent),
+			m(MainComponent),
+			m(FooterComponent)
+		])
+	)
+  })
