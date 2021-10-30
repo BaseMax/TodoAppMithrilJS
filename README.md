@@ -17,6 +17,7 @@ You can check preview of the project [here](https://basemax.github.io/TodoAppMit
 - **Arthur**: showed me what was my mistake at `ContainerComponent`
 - **Patrik**: help and guide
 - **Oscar**: teached me more deeply about MIthrilJS
+- **Erfan**: UI/Logo licensed under him and not allowed for public using
 
 And again thanks from Mithril team members.
 
