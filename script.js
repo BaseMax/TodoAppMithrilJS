@@ -48,20 +48,24 @@ class FooterComponent {
 	}
 	view() {
 		return m("footer", {class:"footer"}, 
-					m("div", {class:"footer__wrapper", "data-action":"add"},
+					m("form", {name: "todos", class:"footer__wrapper", "data-action":"add", onsubmit: (e) => {
+						e.preventDefault();
+						this.add(document.forms.todos.todo.value)
+					}},
 						[
 							m("div", {class:"form-box"},
 								[
 									m("input", {
+										name: "todo",
 										class:"form-box__input", 
 										type:"text", 
 										placeholder:"add todo...", 
 										// oninput: (e) => { this.handleInput(e) },
-										onkeyup: (e) => { this.handleInput(e) },
+										// onkeyup: (e) => { this.handleInput(e) },
 										value: this.value,
 
 									}),
-									m("button", {class:"form-box__btn", type:"submit", onclick: () => this.add()},
+									m("button", {class:"form-box__btn", type:"submit"},
 										"Add"
 									)
 								]
@@ -190,4 +194,4 @@ m.mount(document.body, {
 			m(FooterComponent)
 		])
 	)
-  })
+})
