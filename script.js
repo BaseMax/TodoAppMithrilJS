@@ -164,15 +164,9 @@ class ThemeComponent {
 }
 
 class ContainerComponent {
-	constructor(vnode) {
-		this.vnode = vnode
-	}
-	oncreate() {
-
-	}
-	view() {
+	view({children}) {
 		return m("div", {class:"container"},
-			this.vnode.children
+			children
 		)
 	}
 }
