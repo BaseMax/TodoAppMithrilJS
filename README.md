@@ -12,6 +12,10 @@ You can check preview of the project [here](https://basemax.github.io/TodoAppMit
 | :---: | :---: |
 | [![Mithril Javascript Todo App](demo-white.png)](https://basemax.github.io/TodoAppMithrilJS/) | [![Mithril Javascript Todo App](demo-black.png)](https://basemax.github.io/TodoAppMithrilJS/) | 
 
+## TODO
+
+- Support **dark** theme
+
 ## Credit
 
 - **Arthur**: showed me what was my mistake at `ContainerComponent`
